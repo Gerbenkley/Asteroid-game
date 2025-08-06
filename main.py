@@ -36,17 +36,20 @@ def main():
 
         #MAIN LOOP
         screen.fill(0)
-
         updatable.update(dt)
 
+        #COLLISION CHECKS
         for asteroid in asteroids:
+            for shot in shots:
+                if asteroid.collisioncheck(shot):
+                    asteroid.kill()
+                    shot.kill()
             if asteroid.collisioncheck(player):
                 print("Game over!")
                 sys.exit()
-
+        #DRAW
         for drawables in drawable:
             drawables.draw(screen)
-
         pygame.display.flip()
 
 
