@@ -1,8 +1,11 @@
+import sys
 import pygame
+
 from constants import *
 from player import *
 from asteroid import *
 from asteroidfield import *
+from circleshape import *
 
 def main():
     pygame.init()
@@ -32,6 +35,12 @@ def main():
         screen.fill(0)
 
         updatable.update(dt)
+
+        for asteroid in asteroids:
+            if asteroid.collisioncheck(player):
+                print("Game over!")
+                sys.exit()
+
         for drawables in drawable:
             drawables.draw(screen)
 
